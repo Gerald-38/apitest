@@ -1,0 +1,28 @@
+    <!DOCTYPE html>
+    <html xmlns:th"http://www.thymeleaf.org">
+	    <head>
+	        <meta charset="UTF-8">
+	        <title>Welcome</title>
+	        <link rel="stylesheet"  type="text/css" th:href="@{/css/style.css}"/>
+	    </head>
+		    <body>
+			    <div>
+			    <table>
+				    <thead>
+					    <tr>
+						    <th>TITLE</th>
+						    <th>DESCRIPTION</th>
+						    <th>DURATION</th>
+					    </tr>
+				    </thead>
+				    <tbody>
+					    <tr th:each="movie: ${movies}">
+						    <td th:text="${movie.title}">Mark</td>
+						    <td th:text="${movie.description}">Ottos</td>
+						    <td th:text="${movie.duration}">@mdo</td>
+					    </tr>
+				    </tbody>			    
+			    </table>			    
+			    </div>		        
+		    </body>
+    </html>
