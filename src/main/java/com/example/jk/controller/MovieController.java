@@ -1,6 +1,8 @@
 package com.example.jk.controller;
 import com.example.jk.model.Movie;
 import com.example.jk.repository.MovieRepository;
+import com.example.jk.service.CreateMovieService;
+import com.example.jk.service.GetMovieService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +19,26 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepository;
+    
+    @Autowired
+    private GetMovieService getMovieService;
+    
+    @Autowired
+    private CreateMovieService createMovieService;
 
+//    @GetMapping("/movies")
+//    public String getMovies(Model model) {
+//
+//        List<Movie> movies = movieRepository.findAll();
+//        model.addAttribute("movies", movies);
+//
+//        return "home";
+//    }
+    
     @GetMapping("/movies")
     public String getMovies(Model model) {
-
-        List<Movie> movies = movieRepository.findAll();
+        List<Movie> movies = getMovieService.getMovies();
         model.addAttribute("movies", movies);
-
         return "home";
     }
 
@@ -32,24 +47,29 @@ public class MovieController {
         return "about";
     }
 
+//    @PostMapping("/movie")
+//    public String saveMovie(@RequestParam String title, @RequestParam Integer duration, @RequestParam String description) {
+//        System.out.println(title + description + duration);
+//    	Movie movie = new Movie();
+//        movie.setTitle(title);
+//        movie.setDuration(duration);
+//        movie.setDescription(description);
+//
+//        movieRepository.save(movie);
+//
+//        //return "home";
+//       return "redirect:movies";
+//    }
+    
     @PostMapping("/movie")
     public String saveMovie(@RequestParam String title, @RequestParam Integer duration, @RequestParam String description) {
-        System.out.println(title + description + duration);
-    	Movie movie = new Movie();
-        movie.setTitle(title);
-        movie.setDuration(duration);
-        movie.setDescription(description);
-
-        movieRepository.save(movie);
-
-        //return "home";
+       createMovieService.saveMovie(title, duration, description);
        return "redirect:movies";
     }
 
     @DeleteMapping("/about/{id}")
     public String deleteById(@PathVariable Long id) {
         movieRepository.deleteById(id);
-
         return "home";
     }
 }
