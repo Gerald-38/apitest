@@ -73,6 +73,8 @@
             <th scope="col">Title</th>
             <th scope="col">Duration</th>
             <th scope="col">Description</th>
+            <th scope="col">Modification</th>
+            <th scope="col">Suppression</th>
         </tr>
         </thead>
         <tbody>
@@ -81,11 +83,25 @@
             <td th:utext="${movie.title}"></td>
             <td th:utext="${movie.duration}"></td>
             <td th:utext="${movie.description}"></td>
+            <td>
+		 	    <a th:href="'/catalog/form-update/' + ${movie.id}">
+	              <button class="btn btn-success" >Update</button>
+	            </a>
+          	</td>
+            <td>
+<!--             	<form th:action="'/catalog/movie' + ${movie.id}" th:method="delete">
+			    	<input type="hidden" name="_method" value="delete" class="form-control">	                    	
+            		<button class="btn btn-danger">Delete</button>
+            	</form> -->
+            	<!-- <button class="btn btn-danger">Delete</button> -->
+	           	<form th:action="'/catalog/movies/' + ${movie.id}" th:method="delete">
+	              	<button class="btn btn-danger">Delete</button>
+	            </form>
+           	</td>
         </tr>
         </tbody>
     </table>
 </div>
-
 
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th='http://www.thymeleaf.org'>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Catalog movie</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/catalog/home">Accueil</a>
+        </li>
+        <li>
+          <a href="/catalog/form">Ajouter un film</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <body>
+  <h1>Modifier un film</h1>
+
+  <form th:action="'/catalog/movies/' + ${movie.id}" th:method="put">
+    <div>
+      <label for="title">Titre</label>
+      <input type="text" name="title" id="title" th:value="${movie.title}">
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <input type="text" name="description" id="description" th:value="${movie.description}">
+    </div>
+    <div>
+      <label for="duration">Durée (minutes)</label>
+      <input type="number" name="duration" id="duration" th:value="${movie.duration}" required>
+    </div>
+    <button>Modifier</button>
+  </form>
+  </body>
+</html>
